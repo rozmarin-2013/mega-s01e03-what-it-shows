@@ -20,6 +20,11 @@ channel separate its reports into two causes.
 
 <CauseTable ticket={4471} />
 
+## Engineering tickets
+
+- [Shared parser flips day-first dates](https://github.com/rozmarin-2013/mega-s01e03-what-it-shows/issues/1)
+- [booking-v3 shows the wrong date-order hint](https://github.com/rozmarin-2013/mega-s01e03-what-it-shows/issues/2)
+
 ## Shared parser
 
 The shared parser reads dates month-first. For tenants whose locale writes the day first,
