@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>#4471 · two date failures · support kb</title>
+  <style>
+    :root { --bg:#fbfaf7; --fg:#1d1d1b; --muted:#6b6a66; --line:#e3e0d8; --accent:#2f6f5e; --warn:#b4501f; --note:#eef5f2; --mono:ui-monospace,"Cascadia Code",Menlo,monospace; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--fg); font:16px/1.6 system-ui,sans-serif; }
+    .kb { max-width:760px; margin:0 auto; padding:2rem 16px 4rem; }
+    .crumb { color:var(--muted); font:0.8rem var(--mono); text-decoration:none; }
+    h1 { margin:.25rem 0 .5rem; line-height:1.2; }
+    h2 { margin-top:2rem; line-height:1.25; }
+    .meta { display:flex; flex-wrap:wrap; gap:.5rem 1rem; color:var(--muted); font-size:.85rem; margin:0 0 2rem; }
+    .status { border:1px solid var(--line); border-radius:99px; padding:0 .6rem; }
+    table { border-collapse:collapse; width:100%; margin:1rem 0; font-size:.92rem; }
+    th,td { border-bottom:1px solid var(--line); padding:.45rem .5rem; text-align:left; vertical-align:top; }
+    th { color:var(--muted); font-size:.78rem; text-transform:uppercase; letter-spacing:.04em; }
+    code { font-family:var(--mono); font-size:.88em; }
+    a { color:var(--accent); }
+    .wrong td:first-child { color:var(--warn); font-weight:600; }
+    .callout { margin:1.5rem 0; padding:.8rem 1rem; background:var(--note); border-left:4px solid var(--accent); border-radius:4px; }
+    .stamp { margin:2rem 0 0; color:var(--muted); font:.85rem var(--mono); }
+    .stamp b { color:var(--accent); letter-spacing:.04em; }
+    footer { margin-top:3rem; padding-top:1rem; border-top:1px solid var(--line); color:var(--muted); font-size:.8rem; }
+  </style>
+</head>
+<body>
+  <div class="kb">
+    <header>
+      <a class="crumb" href="../../../../">support desk · kb</a>
+      <h1>#4471 · two date failures</h1>
+      <p class="meta"><span>owner <b>rozmarin-2013</b></span><span class="status">proposed</span><span>reviewed 2026-11-01</span></p>
+    </header>
+
+    <main>
+      <p>Ticket #4471 does not contain one problem. Tenant locale, booking-form version, and report channel separate its reports into two causes.</p>
+
+      <p><strong>412</strong> unique reports merged into #4471 · <strong>2</strong> causes</p>
+      <table aria-label="Reports grouped by cause">
+        <thead><tr><th>cause</th><th>reports</th><th>tagged as</th><th>tenants</th><th>seen</th><th>ticket</th></tr></thead>
+        <tbody>
+          <tr><td><code>parser</code></td><td>379</td><td>parser 356 · hint 23</td><td>11</td><td>2026-04-01<br>2026-10-04</td><td>#4471</td></tr>
+          <tr class="wrong"><td><code>hint</code></td><td>33</td><td>hint 18 · parser 15</td><td>3</td><td>2026-04-17<br>2026-09-22</td><td>not this ticket — no ticket of its own</td></tr>
+        </tbody>
+      </table>
+      <p><small>Five parser reports were read by the desk as one-day moves; they remain classified by tenant and channel.</small></p>
+
+      <h2>Engineering tickets</h2>
+      <ul>
+        <li><a href="https://github.com/rozmarin-2013/mega-s01e03-what-it-shows/issues/1">Shared parser flips day-first dates</a></li>
+        <li><a href="https://github.com/rozmarin-2013/mega-s01e03-what-it-shows/issues/2">booking-v3 shows the wrong date-order hint</a></li>
+      </ul>
+
+      <h2>Shared parser</h2>
+      <p>The shared parser reads dates month-first. For tenants whose locale writes the day first, dates with two valid month numbers are silently flipped. This affects app, email, and form reports.</p>
+
+      <h2>booking-v3 hint</h2>
+      <p><code>booking-v3</code> prints <code>MM/DD/YYYY</code> under its date field. Day-first tenants follow that hint, but the form reads the entered value in the tenant's order. This is a separate form problem, even when the report subject matches a parser report.</p>
+
+      <div class="callout">The subject line and intake tag are not enough to deduplicate these reports. Classify them by tenant locale, booking-form version, and channel.</div>
+
+      <h2>Triage change</h2>
+      <p>Keep one engineering ticket per cause. Deduplicate overlapping export rows by report ID before counting, and keep the desk's one-day-move notes with the parser group unless stronger evidence places them elsewhere.</p>
+
+      <p class="stamp">desk ref <b>DR-Z5A8-DJ1M</b></p>
+    </main>
+
+    <footer>Pages are written by people. Tables and charts are built from data at render time.</footer>
+  </div>
+</body>
+</html>
