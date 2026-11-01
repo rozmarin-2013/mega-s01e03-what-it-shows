@@ -1,0 +1,46 @@
+---
+layout: runbook
+title: '#4471 · two date failures'
+owner: rozmarin-2013
+status: proposed
+reviewed: 2026-11-01
+signature: rozmarin-2013
+---
+
+<script>
+  import CauseTable from '#lib/kb/CauseTable.svelte';
+  import Callout from '#lib/kb/Callout.svelte';
+  import RenderStamp from '#lib/kb/RenderStamp.svelte';
+
+  const { signature } = $props();
+</script>
+
+Ticket #4471 does not contain one problem. Tenant locale, booking-form version, and report
+channel separate its reports into two causes.
+
+<CauseTable ticket={4471} />
+
+## Shared parser
+
+The shared parser reads dates month-first. For tenants whose locale writes the day first,
+dates with two valid month numbers are silently flipped. This affects app, email, and form
+reports.
+
+## booking-v3 hint
+
+`booking-v3` prints `MM/DD/YYYY` under its date field. Day-first tenants follow that hint, but
+the form reads the entered value in the tenant's order. This is a separate form problem, even
+when the report subject matches a parser report.
+
+<Callout>
+The subject line and intake tag are not enough to deduplicate these reports. Classify them by
+tenant locale, booking-form version, and channel.
+</Callout>
+
+## Triage change
+
+Keep one engineering ticket per cause. Deduplicate overlapping export rows by report ID before
+counting, and keep the desk's one-day-move notes with the parser group unless stronger evidence
+places them elsewhere.
+
+<RenderStamp {signature} />
