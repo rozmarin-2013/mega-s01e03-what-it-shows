@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>#4471 · two date failures · support kb</title>
+  <title>#4471 · three date failures · support kb</title>
   <style>
     :root { --bg:#fbfaf7; --fg:#1d1d1b; --muted:#6b6a66; --line:#e3e0d8; --accent:#2f6f5e; --warn:#b4501f; --note:#eef5f2; --mono:ui-monospace,"Cascadia Code",Menlo,monospace; }
     * { box-sizing:border-box; }
@@ -30,41 +30,45 @@
   <div class="kb">
     <header>
       <a class="crumb" href="../../../../">support desk · kb</a>
-      <h1>#4471 · two date failures</h1>
+      <h1>#4471 · three date failures</h1>
       <p class="meta"><span>owner <b>rozmarin-2013</b></span><span class="status">proposed</span><span>reviewed 2026-11-02</span></p>
     </header>
 
     <main>
-      <p>Ticket #4471 does not contain one problem. Tenant locale, booking-form version, and report channel separate its reports into two causes.</p>
+      <p>Ticket #4471 does not contain one problem. Tenant locale, booking-form version, report channel, and the desk's follow-up separate its reports into three causes.</p>
 
-      <p><strong>412</strong> unique reports merged into #4471 · <strong>2</strong> causes</p>
+      <p><strong>412</strong> unique reports merged into #4471 · <strong>3</strong> causes</p>
       <table aria-label="Reports grouped by cause">
         <thead><tr><th>cause</th><th>reports</th><th>tagged as</th><th>tenants</th><th>seen</th><th>ticket</th></tr></thead>
         <tbody>
-          <tr><td><code>parser</code></td><td>379</td><td>parser 356 · hint 23</td><td>11</td><td>2026-04-01<br>2026-10-04</td><td>#4471</td></tr>
+          <tr><td><code>parser</code></td><td>374</td><td>parser 351 · hint 23</td><td>11</td><td>2026-04-01<br>2026-10-04</td><td>#4471</td></tr>
           <tr class="wrong"><td><code>hint</code></td><td>33</td><td>hint 18 · parser 15</td><td>3</td><td>2026-04-17<br>2026-09-22</td><td>not this ticket — no ticket of its own</td></tr>
+          <tr class="wrong"><td><code>one-day-move</code></td><td>5</td><td>parser 5</td><td>5</td><td>2026-04-02<br>2026-10-04</td><td>moved after review</td></tr>
         </tbody>
       </table>
-      <p><small>Five parser reports were read by the desk as one-day moves; they remain classified by tenant and channel.</small></p>
 
       <h2>Engineering tickets</h2>
       <ul>
         <li><a href="https://github.com/rozmarin-2013/mega-s01e03-what-it-shows/issues/1">Shared parser flips day-first dates</a> — <strong>fixed</strong>. The desk moved five one-day-move reports to separate work, so this ticket covers 374 reports.</li>
         <li><a href="https://github.com/rozmarin-2013/mega-s01e03-what-it-shows/issues/2">booking-v3 shows the wrong date-order hint</a> — <strong>won't fix</strong>. The affected form is retired; this ticket covers 33 reports.</li>
+        <li><a href="https://github.com/rozmarin-2013/mega-s01e03-what-it-shows/issues/3">One-day date moves require separate investigation</a> — <strong>open</strong>. The desk moved these 5 reports out of the parser work after review.</li>
       </ul>
 
       <div class="callout">Desk update, 5 October: #4471 is closed. The parser fix shipped; the booking-v3 hint will not be changed because the form is retired.</div>
 
       <h2>Shared parser</h2>
-      <p>The shared parser reads dates month-first. For tenants whose locale writes the day first, dates with two valid month numbers are silently flipped. This affects app, email, and form reports.</p>
+      <p>The shared parser reads dates month-first. For tenants whose locale writes the day first, dates with two valid month numbers are silently flipped. This affects app, email, and form reports. It covers 374 reports after the desk moved five reports to separate work.</p>
 
       <h2>booking-v3 hint</h2>
       <p><code>booking-v3</code> prints <code>MM/DD/YYYY</code> under its date field. Day-first tenants follow that hint, but the form reads the entered value in the tenant's order. This is a separate form problem, even when the report subject matches a parser report.</p>
 
+      <h2>One-day moves</h2>
+      <p>Five reports do not describe a day/month swap. They describe a one-day or weekday shift, an invite before its booking, or the same meeting landing on different weekdays. The desk moved them to separate work after the first review, so they need their own open ticket.</p>
+
       <div class="callout">The subject line and intake tag are not enough to deduplicate these reports. Classify them by tenant locale, booking-form version, and channel.</div>
 
       <h2>Triage change</h2>
-      <p>Keep one engineering ticket per cause. Deduplicate overlapping export rows by report ID before counting, and keep the desk's one-day-move notes with the parser group unless stronger evidence places them elsewhere.</p>
+      <p>Keep one engineering ticket per cause. Deduplicate overlapping export rows by report ID before counting. A desk move is stronger evidence than the intake tag, so move those reports out of the parser group when the desk reclassifies them.</p>
 
       <p class="stamp">desk ref <b>DR-Z5A8-DJ1M</b></p>
     </main>
