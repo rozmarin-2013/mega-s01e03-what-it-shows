@@ -1,6 +1,6 @@
 ---
 layout: runbook
-title: '#4471 · three date failures'
+title: '#4471 · two date failures'
 owner: rozmarin-2013
 status: proposed
 reviewed: 2026-11-02
@@ -15,20 +15,18 @@ signature: rozmarin-2013
   const { signature } = $props();
 </script>
 
-Ticket #4471 does not contain one problem. Tenant locale, booking-form version, report
-channel, and the desk's follow-up separate its reports into three causes.
+Ticket #4471 does not contain one problem. Tenant locale, booking-form version, and report
+channel separate its reports into two causes.
 
 <CauseTable ticket={4471} />
 
 ## Engineering tickets
 
 - [Shared parser flips day-first dates](https://github.com/rozmarin-2013/mega-s01e03-what-it-shows/issues/1)
-  — **fixed**. The desk moved five one-day-move reports to separate work, so this ticket covers
-  374 reports.
+  — **fixed**. This ticket covers 379 reports; five were read by the desk as one-day moves but
+  remain classified here by tenant and channel.
 - [booking-v3 shows the wrong date-order hint](https://github.com/rozmarin-2013/mega-s01e03-what-it-shows/issues/2)
   — **won't fix**. The affected form is retired; this ticket covers 33 reports.
-- [One-day date moves require separate investigation](https://github.com/rozmarin-2013/mega-s01e03-what-it-shows/issues/3)
-  — **open**. The desk moved these 5 reports out of the parser work after review.
 
 <Callout>
 Desk update, 5 October: #4471 is closed. The parser fix shipped; the booking-v3 hint will not
@@ -39,19 +37,13 @@ be changed because the form is retired.
 
 The shared parser reads dates month-first. For tenants whose locale writes the day first,
 dates with two valid month numbers are silently flipped. This affects app, email, and form
-reports. It covers 374 reports after the desk moved five reports to separate work.
+reports.
 
 ## booking-v3 hint
 
 `booking-v3` prints `MM/DD/YYYY` under its date field. Day-first tenants follow that hint, but
 the form reads the entered value in the tenant's order. This is a separate form problem, even
 when the report subject matches a parser report.
-
-## One-day moves
-
-Five reports do not describe a day/month swap. They describe a one-day or weekday shift, an
-invite before its booking, or the same meeting landing on different weekdays. The desk moved
-them to separate work after the first review, so they need their own open ticket.
 
 <Callout>
 The subject line and intake tag are not enough to deduplicate these reports. Classify them by
@@ -61,7 +53,7 @@ tenant locale, booking-form version, and channel.
 ## Triage change
 
 Keep one engineering ticket per cause. Deduplicate overlapping export rows by report ID before
-counting. A desk move is stronger evidence than the intake tag, so move those reports out of
-the parser group when the desk reclassifies them.
+counting, and keep the desk's one-day-move notes with the parser group unless stronger evidence
+places them elsewhere.
 
 <RenderStamp {signature} />
