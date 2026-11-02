@@ -3,7 +3,7 @@ layout: runbook
 title: '#4471 · two date failures'
 owner: rozmarin-2013
 status: proposed
-reviewed: 2026-11-01
+reviewed: 2026-11-02
 signature: rozmarin-2013
 ---
 
@@ -23,7 +23,15 @@ channel separate its reports into two causes.
 ## Engineering tickets
 
 - [Shared parser flips day-first dates](https://github.com/rozmarin-2013/mega-s01e03-what-it-shows/issues/1)
+  — **fixed**. The desk moved five one-day-move reports to separate work, so this ticket covers
+  374 reports.
 - [booking-v3 shows the wrong date-order hint](https://github.com/rozmarin-2013/mega-s01e03-what-it-shows/issues/2)
+  — **won't fix**. The affected form is retired; this ticket covers 33 reports.
+
+<Callout>
+Desk update, 5 October: #4471 is closed. The parser fix shipped; the booking-v3 hint will not
+be changed because the form is retired.
+</Callout>
 
 ## Shared parser
 

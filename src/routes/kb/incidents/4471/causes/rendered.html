@@ -31,7 +31,7 @@
     <header>
       <a class="crumb" href="../../../../">support desk · kb</a>
       <h1>#4471 · two date failures</h1>
-      <p class="meta"><span>owner <b>rozmarin-2013</b></span><span class="status">proposed</span><span>reviewed 2026-11-01</span></p>
+      <p class="meta"><span>owner <b>rozmarin-2013</b></span><span class="status">proposed</span><span>reviewed 2026-11-02</span></p>
     </header>
 
     <main>
@@ -49,9 +49,11 @@
 
       <h2>Engineering tickets</h2>
       <ul>
-        <li><a href="https://github.com/rozmarin-2013/mega-s01e03-what-it-shows/issues/1">Shared parser flips day-first dates</a></li>
-        <li><a href="https://github.com/rozmarin-2013/mega-s01e03-what-it-shows/issues/2">booking-v3 shows the wrong date-order hint</a></li>
+        <li><a href="https://github.com/rozmarin-2013/mega-s01e03-what-it-shows/issues/1">Shared parser flips day-first dates</a> — <strong>fixed</strong>. The desk moved five one-day-move reports to separate work, so this ticket covers 374 reports.</li>
+        <li><a href="https://github.com/rozmarin-2013/mega-s01e03-what-it-shows/issues/2">booking-v3 shows the wrong date-order hint</a> — <strong>won't fix</strong>. The affected form is retired; this ticket covers 33 reports.</li>
       </ul>
+
+      <div class="callout">Desk update, 5 October: #4471 is closed. The parser fix shipped; the booking-v3 hint will not be changed because the form is retired.</div>
 
       <h2>Shared parser</h2>
       <p>The shared parser reads dates month-first. For tenants whose locale writes the day first, dates with two valid month numbers are silently flipped. This affects app, email, and form reports.</p>
